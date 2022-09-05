@@ -1,0 +1,19 @@
+stages:
+  - test-automation
+  - build-automation
+  - deploy-automation
+
+test:
+  stage: test-automation
+  script:
+    - echo "test"
+
+build:
+  stage: build-automation
+  script:
+    - echo "build"
+
+deploy:
+  stage: deploy-automation
+  script:
+    - echo "deploy"

@@ -1,0 +1,19 @@
+stages:
+  - test-dashboard-api
+  - build-dashboard-api
+  - deploy-dashboard-api
+
+test:
+  stage: test-dashboard-api
+  script:
+    - echo "test"
+
+build:
+  stage: build-dashboard-api
+  script:
+    - echo "build"
+
+deploy:
+  stage: deploy-dashboard-api
+  script:
+    - echo "deploy"

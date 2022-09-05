@@ -1,0 +1,43 @@
+stages:
+  - test
+  - build
+  - db_operation
+  - deploy
+
+test:
+  stage: test
+  script:
+    - echo "test"
+
+test:unit-test:
+  stage: test
+  script:
+    - echo "unit test"
+
+test:quarity-test:
+  stage: test
+  script:
+    - echo "quarity-test test"
+
+
+build:
+  stage: build
+  script:
+    - echo "build"
+  only:
+    refs:
+        - master
+        - stage
+        - prod
+        - qa
+
+deploy:
+  stage: deploy
+  script:
+    - echo "deploy"
+  only:
+    refs:
+        - master
+        - stage
+        - prod
+        - qa    

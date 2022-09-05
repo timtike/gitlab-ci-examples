@@ -1,0 +1,42 @@
+stages:
+  - test-ad-exchange
+  - build-ad-exchange
+  - deploy-ad-exchange
+
+test:
+  stage: test-ad-exchange
+  script:
+    - echo "test"
+
+test:unit-test:
+  stage: test-ad-exchange
+  script:
+    - echo "unit test"
+
+test:quarity-test:
+  stage: test-ad-exchange
+  script:
+    - echo "quarity-test test"
+
+
+build:
+  stage: build-ad-exchange
+  script:
+    - echo "build"
+  only:
+    refs:
+        - master
+        - stage
+        - prod
+        - qa
+
+deploy:
+  stage: deploy-ad-exchange
+  script:
+    - echo "deploy"
+  only:
+    refs:
+        - master
+        - stage
+        - prod
+        - qa    

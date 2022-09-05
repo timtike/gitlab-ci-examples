@@ -1,0 +1,19 @@
+stages:
+  - test-dashboard-ui
+  - build-dashboard-ui
+  - deploy-dashboard-ui
+
+test:
+  stage: test-dashboard-ui
+  script:
+    - echo "test"
+
+build:
+  stage: build-dashboard-ui
+  script:
+    - echo "build"
+
+deploy:
+  stage: deploy-dashboard-ui
+  script:
+    - echo "deploy"
