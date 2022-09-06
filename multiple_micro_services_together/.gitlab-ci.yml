@@ -1,0 +1,55 @@
+stages:
+  - check-code-change
+  - automation
+
+ad-exchange:
+  stage: check-code-change
+  trigger: 
+    include: ad-exchange/ci-pipeline.yml
+    strategy: depend
+  rules:
+    - changes:
+      - ad-exchange/*
+      - shared/*
+
+dashboard-api:
+  stage: check-code-change
+  trigger: 
+    include: dashboard-api/ci-pipeline.yml
+    strategy: depend
+  rules:
+    - changes:
+      - dashboard-api/*
+      - shared/*
+
+dashboard-ui:
+  stage: check-code-change
+  trigger: 
+    include: dashboard-ui/ci-pipeline.yml
+    strategy: depend
+  rules:
+    - changes:
+      - dashboard-ui/*
+      - shared/*
+
+data-replicator:
+  stage: check-code-change
+  trigger: 
+    include: ad-exchange-data-replicator/ci-pipeline.yml
+    strategy: depend
+  rules:
+    - changes:
+      - ad-exchange-data-replicator/*
+      - shared/*
+
+automation:
+  stage: automation
+  trigger: 
+    include: automation/ci-pipeline.yml
+    strategy: depend
+  only:
+      refs:
+          - master
+          - stage
+          - prod
+          - qa
