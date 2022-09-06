@@ -2,7 +2,7 @@ multiple micro services in one repo
 
 
 
-it's logic is:
+its logic is:
 
 update frontend code -> run frontend cicd and automation test
 
