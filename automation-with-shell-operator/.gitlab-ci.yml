@@ -1,0 +1,41 @@
+stages:
+  - build
+  - unit_test
+  - api_test
+
+variables:
+  IMAGE_NAME: my-image
+  IMAGE_TAG: latest
+
+build:
+  stage: build
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+  # only:
+  #   changes:
+  #     - ./requirements.txt
+  tags:
+    - shell
+
+unit_test:
+  stage: unit_test
+  script:
+    - docker run --name unit_test $IMAGE_NAME:$IMAGE_TAG bash -c "./run_unit_test.sh"
+  after_script:
+    - docker rm -f unit_test
+  tags:
+    - shell
+
+api_test:
+  stage: api_test
+  before_script:
+    - docker network create mynetwork
+
+  script:
+    - docker run --network=mynetwork --name $IMAGE_NAME -d $IMAGE_NAME:$IMAGE_TAG 
+    - docker run --network=mynetwork --name api_test -e DOMAIN=$IMAGE_NAME $IMAGE_NAME:$IMAGE_TAG bash -c "python3 -m pytest"
+  after_script:
+    - docker rm -f $IMAGE_NAME api_test
+    - docker network rm mynetwork
+  tags:
+    - shell
